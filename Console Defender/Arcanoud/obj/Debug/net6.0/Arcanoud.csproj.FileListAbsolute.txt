@@ -1,0 +1,15 @@
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\bin\Debug\net6.0\Arcanoud.exe
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\bin\Debug\net6.0\Arcanoud.deps.json
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\bin\Debug\net6.0\Arcanoud.runtimeconfig.json
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\bin\Debug\net6.0\Arcanoud.dll
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\bin\Debug\net6.0\Arcanoud.pdb
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\obj\Debug\net6.0\Arcanoud.csproj.AssemblyReference.cache
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\obj\Debug\net6.0\Arcanoud.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\obj\Debug\net6.0\Arcanoud.AssemblyInfoInputs.cache
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\obj\Debug\net6.0\Arcanoud.AssemblyInfo.cs
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\obj\Debug\net6.0\Arcanoud.csproj.CoreCompileInputs.cache
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\obj\Debug\net6.0\Arcanoud.dll
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\obj\Debug\net6.0\refint\Arcanoud.dll
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\obj\Debug\net6.0\Arcanoud.pdb
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\obj\Debug\net6.0\Arcanoud.genruntimeconfig.cache
+C:\Users\галя\Desktop\C#\Arcanoud\Arcanoud\obj\Debug\net6.0\ref\Arcanoud.dll
