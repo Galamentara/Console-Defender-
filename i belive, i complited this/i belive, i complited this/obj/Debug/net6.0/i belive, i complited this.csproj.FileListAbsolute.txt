@@ -1,0 +1,15 @@
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\bin\Debug\net6.0\i belive, i complited this.exe
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\bin\Debug\net6.0\i belive, i complited this.deps.json
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\bin\Debug\net6.0\i belive, i complited this.runtimeconfig.json
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\bin\Debug\net6.0\i belive, i complited this.dll
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\bin\Debug\net6.0\i belive, i complited this.pdb
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\obj\Debug\net6.0\i belive, i complited this.csproj.AssemblyReference.cache
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\obj\Debug\net6.0\i belive, i complited this.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\obj\Debug\net6.0\i belive, i complited this.AssemblyInfoInputs.cache
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\obj\Debug\net6.0\i belive, i complited this.AssemblyInfo.cs
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\obj\Debug\net6.0\i belive, i complited this.csproj.CoreCompileInputs.cache
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\obj\Debug\net6.0\i belive, i complited this.dll
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\obj\Debug\net6.0\refint\i belive, i complited this.dll
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\obj\Debug\net6.0\i belive, i complited this.pdb
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\obj\Debug\net6.0\i belive, i complited this.genruntimeconfig.cache
+C:\Users\галя\Desktop\C#\i belive, i complited this\i belive, i complited this\obj\Debug\net6.0\ref\i belive, i complited this.dll
