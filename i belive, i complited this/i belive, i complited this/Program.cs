@@ -1,225 +1,169 @@
-﻿using System.Reflection;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace i_belive__i_complited_this
 {
     public class Program {
-        public class Unit{
-            public int X = 0;
-            public int Y = 0;
-            public char sprite = '0';
-            public void Move(int x, int y) {
-                X += x;
-                Y += y;
+        static void Main(){
+
+            static void Frame(List<Enemy> enem, List<Bullet> bull, List<EnemyBullet> enemBull, User user, List<Bonus> bonuses, List<Bomb> bombs) {
+
+                for (int i = 0; i < enem.Count; i++) { enem[i].Write(); }
+                
+                for (int i = 0; i < bull.Count; i++) { bull[i].Write(); }
+                for (int i = 0; i < bombs.Count; i++) { bombs[i].Write(); }
+                for (int i = 0; i < enemBull.Count; i++) { enemBull[i].Write(); }
+                for (int i = 0; i < bonuses.Count; i++) { bonuses[i].Write(); }
+                
+                Console.SetCursorPosition((98 - (user.hp)), 1);
+                for (int i = 0; i < user.hp; i++) { Console.Write('♥'); }
+
+                Console.SetCursorPosition(1, 20);
+                for (int i = 1; i < 98; i++) { Console.Write('─'); }
+
+                Console.SetCursorPosition(0, 1);
+                Console.Write(user.Score);
+
+                user.WriteUser();
             }
-            public void Write() {
-                Console.SetCursorPosition(X, Y);
-                Console.Write(sprite);
-            }
-        }
-        public class Enemy : Unit {
-            Random rnd = new Random();
-            private int counter = 0;
-            public Enemy(int x, int y, char sprite) {
-                X = x;
-                Y = y;
-                this.sprite = sprite;
-            }
-            public bool HitCheck(ref List<Bullet> bullets) {
-                if (bullets.Count > 0) {
-                    for (int i = 0; i < bullets.Count; i++) {
-                        if (bullets[i].X == X && (bullets[i].Y == Y)) {
-                            bullets.RemoveAt(i);
-                            return true;
+
+            Console.SetWindowSize(100, 21);
+            Console.SetBufferSize(100, 21);
+
+            int level = 0;
+            int[,] enemyLine = new int[10,2] {
+                { 1, 0 },
+                { 2, 0 },
+                { 3, 0 },
+                { 1, 1 },
+                { 2, 1 },
+                { 3, 1 },
+                { 4, 1 },
+                { 1, 2 },
+                { 2, 2 },
+                { 3, 2 },
+            };
+            User user = new();
+            while (true) {
+                level++;
+                if (level == 10) {
+                    Console.Clear();
+
+                    Console.SetCursorPosition(45, 10);
+                    Console.Write("You Winner");
+                    Console.SetCursorPosition(0, 0);
+                    bool endGame = true;
+                    while (endGame) {
+                        if (Console.KeyAvailable) {
+                            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                            string key = keyInfo.Key.ToString();
+                            if (key == "N") {
+                                Console.Clear();
+                                endGame = false;
+                                level = 1;
+                                user = new User();
+                            }
                         }
                     }
                 }
-                return false;
-            }
-            public void NextPosition() {
-                if (counter == 20) {
-                    Move(-1, 0);
-                } else if (counter == 40) {
-                    Move(0, 1);
-                } else if (counter == 60) {
-                    Move(1, 0);
-                } else if (counter == 80) {
-                    Move(0, 1);
-                }
-                if (counter == 80) {
-                    counter = 0;
-                } else {
-                    counter++;
-                }
-            }
-            public void Fire(ref List<EnemyBullet> enemB) {
-                if (rnd.Next(0, 50) == 1) {
-                    enemB.Add(new EnemyBullet(X, Y, '*'));
-                }
-            }
-        }
-        public class EnemyBullet : Unit {
-            public bool Fall() {
-                if (Y == 19) {
-                    return true;
-                } else {
-                    Y++;
-                    return false;
-                }
-            }
-            /*public bool Shot(List<Bullet> bullets) {
-                for (int i = 0; i < bullets.Count; i++) {
-                    if ((bullets[i].X == X) && ((bullets[i].Y == Y) || (bullets[i].Y == Y - 1))) {
-                        bullets.RemoveAt(i);
-                        return true;
-                    }
-                }
-                return false;
-            }*/
-            public EnemyBullet(int x, int y, char sprite) {
-                X = x;
-                Y = y - 1;
-                this.sprite = sprite;
-            }
-        }
-        public class Bullet : Unit {
-            public bool bulletMove() {
-                if (Y > 0) {
-                    Move(0, -1);
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-            public Bullet(int x, char sprite) {
-                X = x;
-                Y = 19;
-                this.sprite = sprite;
-            }
-        }
-        public class User : Unit {
-            public void Left() {
-                if (X != 7) {
-                    Move(-1, 0);
-                }
-            }
-            public void Right() {
-                if (X != 92) {
-                    Move(1, 0);
-                }
-            }
-            public void Fire(ref List<Bullet> bullets) {
-                bullets.Add(new Bullet(X, '|'));
-            }
-            public bool FailCheck(List<EnemyBullet> enemB) {
-                for (int i = 0; i < enemB.Count; i++) {
-                    if ((enemB[i].X == X) && (enemB[i].Y == Y)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            public User(char sprite) {
-                this.sprite = sprite;
-                X = 50;
-                Y = 19;
-            }
-        }
-        static void Main(string[] args){
-
-            void Frame(List<Enemy> enem, List<Bullet> bull, List<EnemyBullet> enemBull, User user, int hp, int score) {
-                foreach (Enemy e in enem) {
-                    e.NextPosition();
-                    e.Write();
-                }
-                foreach (Bullet b in bull) {
-                    b.Write();
-                }
-                foreach (EnemyBullet eB in enemBull) {
-                    eB.Write();
-                }
-                for (int i = 0; i < hp; i++) {
-                    Console.SetCursorPosition((98 - (i + 1)), 1);
-                    Console.Write('♥');
-                }
-                Console.SetCursorPosition(0, 1);
-                Console.Write(score);
-                user.Write();
-            }
-
-            Console.SetWindowSize(100, 20);
-            Console.SetBufferSize(100, 20);
-
-            while (true) {
-                User user = new User('X');
-                List<EnemyBullet> enemyBullets = new List<EnemyBullet>();
-                List<Bullet> bullets = new List<Bullet>();
-                List<Enemy> enemies = new List<Enemy>();
-                for (int i = 0; i < 29; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        enemies.Add(new Enemy((((i + 1) * 3) + 5), (((j + 1) * 3) - 2), 'W'));
+                Console.SetCursorPosition(45, 10);
+                Console.Write($"LEVEL - {level}");
+                Thread.Sleep(1000);
+                List<EnemyBullet> enemyBullets = new();
+                List<Bullet> bullets = new();
+                List<Bonus> bonuses = new();
+                List<Bomb> bombs = new();
+                List<Enemy> enemies = new();
+                for (int i = 0; i < enemyLine[level - 1, 0]; i++) {
+                    for (int j = 0; j < 29; j++) {
+                        int x = ((j + 1) * 3) + 5 + (i % 2);
+                        int y = ((i + 1) * (3 - (enemyLine[level - 1, 0] / 3))) - (3 - (enemyLine[level - 1, 0] / 3)) + 1;
+                        enemies.Add(new Enemy(x, y, enemyLine[level - 1, 1]));
                     }
                 }
                 int counter = 0;
-                int hp = 3;
-                int score = 0;
                 bool gameOver = false;
+                bool gameWin = false;
                 bool enemyWinn = false;
-                while (!gameOver) {
+                Random rnd = new();
+                while (!gameOver && !gameWin) {
                     if (Console.KeyAvailable) {
                         ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                         string key = keyInfo.Key.ToString();
-                        if (key == "A") {
-                            user.Left();
-                        }
-                        if (key == "D") {
-                            user.Right();
-                        }
-                        if (key == "W") {
-                            user.Fire(ref bullets);
-                        }
+                        if (key == "A") { user.Left(); }
+                        if (key == "D") { user.Right(); }
+                        if (key == "W") { user.Fire(ref bullets); }
+                        if (key == "R") { gameOver = true; }
+                        if (key == "Z") { enemies.Clear(); }
+                        if (key == "Spacebar") { user.FireBomb(ref bombs); }
+                        if (key == "Q") { user.LevelUp(); }
+                        if (key == "E") { user.Default(); }
+
+
                     }
 
                     if (counter == 10) {
-                        Console.Clear();
                         for (int i = 0; i < enemies.Count; i++) {
                             if (enemies[i].HitCheck(ref bullets)) {
                                 enemies.RemoveAt(i);
-                                score++;
+                                user.AddScore();
                                 i--;
-                            } else {
-                                enemies[i].Fire(ref enemyBullets);
+                            }
+                        }
+                        for (int i = 0; i < enemies.Count; i++) {
+                            Bomb? hitBomb = enemies[i].HitCheck(ref bombs);
+                            if (hitBomb != null) {
+                                for (int j = 0; j < enemies.Count; j++) {
+                                    if (enemies[j].WaveCheck(ref hitBomb)) {
+                                        enemies.RemoveAt(j);
+                                        user.AddScore();
+                                        j--;
+                                    }
+                                }
+                                bombs.Remove(hitBomb);
                             }
                         }
                         for (int i = 0; i < bullets.Count; i++) {
-                            if (bullets[i].bulletMove()) {
-                                bullets.RemoveAt(i);
-                                i--;
-                            }
+                            if (bullets[i].BulletMove()) { bullets.RemoveAt(i); i--; }
                         }
                         for (int i = 0; i < enemyBullets.Count; i++) {
-                            /*if (enemyBullets[i].Shot(bullets)) {
-                                enemyBullets.RemoveAt(i);
-                                i--;
-                            } else*/ if (enemyBullets[i].Fall()) {
-                                enemyBullets.RemoveAt(i);
-                                i--;
+                            if (enemyBullets[i].Fall()) { enemyBullets.RemoveAt(i); i--; }
+                        }
+                        for (int i = 0; i < bonuses.Count; i++) {
+                            if (bonuses[i].Fall()) { bonuses.RemoveAt(i); i--; }
+                        }
+                        for (int i = 0; i < bombs.Count; i++) {
+                            if (bombs[i].BombMove()) { bombs.RemoveAt(i); i--; }
+                        }
+                        for (int i = 0; i < enemies.Count; i++) {
+                            if (enemies[i].Y == 19) { enemyWinn = true; user.hp = 1; }
+                            enemies[i].Fire(ref enemyBullets);
+                            enemies[i].NextPosition();
+                        }
+                        if (rnd.Next(0, 20) == 1) { bonuses.Add(new Bonus()); }
+
+                        if (bonuses.Count > 0) {
+                            Bonus? bns = user.FailCheck(bonuses);
+                            if (bns != null) {
+                                switch (bns.Type) {
+                                    case 0: { user.LevelUp(); } break;
+                                    case 1: { enemyBullets.Clear(); } break;
+                                    case 2: { user.AddHp(); } break;
+                                }
                             }
                         }
                         
-                        foreach (Enemy e in enemies) {
-                            if (e.Y == 19) {
-                                enemyWinn = true;
-                                hp = 1;
-                            }
-                        }
                         if (user.FailCheck(enemyBullets) || enemyWinn) {
-                            hp--;
-                            if (hp == 0) {
+                            user.RemoveHp();
+                            if (user.hp == 0) {
                                gameOver = true; 
                             } else {
                                 for (int i = 0; i < 10; i++) {
+                                    Console.Clear();
                                     enemyBullets.Clear();
                                     Thread.Sleep(100);
                                     Console.SetCursorPosition(user.X, user.Y);
@@ -230,30 +174,31 @@ namespace i_belive__i_complited_this
 
                                 }
                             }
-                        }
+                        } else if (enemies.Count == 0 && !gameOver) { gameWin = true; }
 
                         Console.Clear();
-                        Frame(enemies, bullets, enemyBullets, user, hp, score);
+                        Frame(enemies, bullets, enemyBullets, user, bonuses, bombs);
                         Console.SetCursorPosition(0, 0);
                         counter = 0;
                     }
                     counter++;
                     Thread.Sleep(10);
                 }
-                Console.Clear();
-                for (int i = 0; i < 200; i++) {
-                    Console.Write("-+СМЕРТЬ-+");
-                }
-                while (gameOver) {
-                    if (Console.KeyAvailable) {
-                        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                        string key = keyInfo.Key.ToString();
-                        if (key == "N") {
-                            gameOver = false;
+                if (gameOver) {
+                    Console.Clear();
+                    for (int i = 0; i < 200; i++) { Console.Write("-+СМЕРТЬ-+"); }
+                    Console.SetCursorPosition(0, 0);
+                    while (gameOver) {
+                        if (Console.KeyAvailable) {
+                            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                            string key = keyInfo.Key.ToString();
+                            if (key == "N") {
+                                Console.Clear();
+                                gameOver = false;
+                            }
                         }
                     }
                 }
-                
             }
         }
     }
