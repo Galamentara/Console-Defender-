@@ -94,16 +94,16 @@ namespace i_belive__i_complited_this
                     if (Console.KeyAvailable) {
                         ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                         string key = keyInfo.Key.ToString();
-                        if (key == "A") { user.Left(); }
-                        if (key == "D") { user.Right(); }
-                        if (key == "W") { user.Fire(ref bullets); }
-                        if (key == "R") { gameOver = true; }
-                        if (key == "Z") { enemies.Clear(); }
-                        if (key == "Spacebar") { user.FireBomb(ref bombs); }
-                        if (key == "Q") { user.LevelUp(); }
-                        if (key == "E") { user.Default(); }
-
-
+                        switch (key) {
+                            case "A": { user.Left(); } break;
+                            case "D": { user.Right(); } break;
+                            case "W": { user.Fire(ref bullets); } break;
+                            case "R": { gameOver = true; } break;
+                            case "Z": { enemies.Clear(); } break;
+                            case "Spacebar": { user.FireBomb(ref bombs); } break;
+                            case "Q": { user.LevelUp(); } break;
+                            case "E": { user.Default(); } break;
+                        }
                     }
 
                     if (counter == 10) {
@@ -153,6 +153,7 @@ namespace i_belive__i_complited_this
                                     case 0: { user.LevelUp(); } break;
                                     case 1: { enemyBullets.Clear(); } break;
                                     case 2: { user.AddHp(); } break;
+                                    case 3: { user.AddScore(10); } break;
                                 }
                             }
                         }
@@ -180,6 +181,10 @@ namespace i_belive__i_complited_this
                         Frame(enemies, bullets, enemyBullets, user, bonuses, bombs);
                         Console.SetCursorPosition(0, 0);
                         counter = 0;
+                    }
+                    if (gameWin && !gameOver) {
+                        Menu menu = new();
+                        menu.StartMenu(user);
                     }
                     counter++;
                     Thread.Sleep(10);

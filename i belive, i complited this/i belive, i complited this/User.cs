@@ -6,19 +6,26 @@ using System.Threading.Tasks;
 
 namespace i_belive__i_complited_this {
     internal class User : Unit {
+        private int maxPh = 3;
         private int score = 0;
         private int level = 0;
-        internal int hp = 3;
+        private int maxBomb = 0;
         private char[] sprites = { '┴', '╨', '╩' };
         private char bigSprite = ' ';
+        private bool aim = false;
+        internal int hp = 3;
         internal int Level {
             get { return level; }
         }
         internal int Score {
             get { return score; }
         }
-        internal void AddScore () { score++; }
-        internal void AddHp () { hp++; }
+        internal void AimOn () { aim = true; }
+        internal void AddMaxBomb () { if (maxBomb < 5) { maxBomb++; } }
+        internal void AimOff () { aim = false; }
+        internal void AddScore (int score = 1) { this.score += score; }
+        internal void AddHp () { if (hp < maxPh) { hp++; } }
+        internal void AddMaxHp() { maxPh++; }
         internal void RemoveHp () { hp--; }
         internal void ReadyToDie () { hp = 0; }
         internal void LevelUp () {
@@ -78,7 +85,7 @@ namespace i_belive__i_complited_this {
             }
         }
         internal void FireBomb(ref List<Bomb> bombs) {
-            if (bombs.Count < level) {
+            if (bombs.Count < maxBomb) {
                 bombs.Add(new Bomb(X, level, '▲'));
             }
         }
@@ -104,10 +111,19 @@ namespace i_belive__i_complited_this {
             return null;
         }
         internal void WriteUser() {
+
             if (level < 3) {
-                Write();
+                Console.SetCursorPosition(X, Y);
+                Console.Write(sprite);
             } else if (level < 6) {
-                Write(bigSprite);
+                Console.SetCursorPosition(X - 1, Y);
+                Console.Write(bigSprite);
+                Console.Write(sprite);
+                Console.Write(bigSprite);
+            }
+            if (aim) {
+                Console.SetCursorPosition(X, 0);
+                Console.Write('↓');
             }
         }
         internal User() {

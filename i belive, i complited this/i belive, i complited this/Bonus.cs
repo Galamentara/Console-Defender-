@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
+﻿using System.Reflection.Emit;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace i_belive__i_complited_this {
     internal class Bonus : Unit {
@@ -21,20 +17,12 @@ namespace i_belive__i_complited_this {
             }
         }
         internal Bonus () {
-            type = rnd.Next(0, 3);
+            type = rnd.Next(0, 4);
             switch (type) {
-                case 0: {
-                        sprite = '+';
-                    }
-                    break;
-                case 1: {
-                        sprite = '®';
-                    }
-                    break;
-                case 2: {
-                        sprite = '♥';
-                    }
-                    break;
+                case 0: { sprite = '+'; } break;
+                case 1: { sprite = '®'; } break;
+                case 2: { sprite = '♥'; } break;
+                case 3: { sprite = '$'; } break;
             }
             X = rnd.Next(8, 91);
             Y = 1;

@@ -27,11 +27,6 @@ namespace i_belive__i_complited_this {
             Console.SetCursorPosition(X, Y);
             Console.Write(sprite);
         }
-        internal void Write(char bigSprite) {
-            Console.SetCursorPosition(X - 1, Y);
-            Console.Write(bigSprite);
-            Console.Write(sprite);
-            Console.Write(bigSprite);
-        }
+        
     }
 }
